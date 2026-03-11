@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import { selectUserBalance } from './core/store/user/user.selectors';
 import { loadUser } from './core/store/user/user.actions';
 import { loadFunds } from './core/store/funds/funds.actions';
+import { CopCurrencyPipe } from './shared/pipes/cop-currency.pipe';
 
 /**
  * AppComponent - Root component, handles navigation and initial data loading
@@ -23,6 +24,7 @@ import { loadFunds } from './core/store/funds/funds.actions';
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
+    CopCurrencyPipe,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

@@ -1,1 +1,122 @@
-<p>history-page works!</p>
+<!-- ============================================ -->
+<!-- HISTORY PAGE - Transaction history           -->
+<!-- ============================================ -->
+
+<div class="history-page">
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="page-header__title">
+      <mat-icon>history</mat-icon>
+      <div>
+        <h1>Transaction History</h1>
+        <p>Track all your fund subscriptions and cancellations</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filters -->
+  <div class="filters">
+    <button
+      class="filter-btn"
+      [class.active]="activeFilter() === 'ALL'"
+      (click)="setFilter('ALL')"
+    >
+      <mat-icon>list</mat-icon>
+      All
+    </button>
+    <button
+      class="filter-btn"
+      [class.active]="activeFilter() === 'SUBSCRIPTION'"
+      (click)="setFilter('SUBSCRIPTION')"
+    >
+      <mat-icon>add_circle</mat-icon>
+      Subscriptions
+    </button>
+    <button
+      class="filter-btn"
+      [class.active]="activeFilter() === 'CANCELLATION'"
+      (click)="setFilter('CANCELLATION')"
+    >
+      <mat-icon>cancel</mat-icon>
+      Cancellations
+    </button>
+  </div>
+
+  <!-- Transactions list -->
+  <ng-container *ngIf="transactions$ | async as transactions">
+    <!-- Empty state -->
+    <div
+      class="empty-state"
+      *ngIf="filterTransactions(transactions).length === 0"
+    >
+      <mat-icon>inbox</mat-icon>
+      <h3>No transactions found</h3>
+      <p>Your transaction history will appear here</p>
+    </div>
+
+    <!-- Transactions -->
+    <div
+      class="transactions-list"
+      *ngIf="filterTransactions(transactions).length > 0"
+    >
+      <mat-card
+        class="transaction-card"
+        [class.transaction-card--subscription]="
+          transaction.type === 'SUBSCRIPTION'
+        "
+        [class.transaction-card--cancellation]="
+          transaction.type === 'CANCELLATION'
+        "
+        *ngFor="let transaction of filterTransactions(transactions)"
+      >
+        <div
+          class="transaction-card__icon"
+          [class.icon--subscription]="transaction.type === 'SUBSCRIPTION'"
+          [class.icon--cancellation]="transaction.type === 'CANCELLATION'"
+        >
+          <mat-icon>{{ getTransactionIcon(transaction.type) }}</mat-icon>
+        </div>
+
+        <div class="transaction-card__info">
+          <h3 class="transaction-card__name">{{ transaction.fundName }}</h3>
+          <div class="transaction-card__meta">
+            <span class="transaction-card__date">
+              <mat-icon>calendar_today</mat-icon>
+              {{ transaction.date | date : "MMM d, y - h:mm a" }}
+            </span>
+            <span class="transaction-card__notification">
+              <mat-icon>{{
+                transaction.notificationMethod === "EMAIL" ? "email" : "sms"
+              }}</mat-icon>
+              {{ transaction.notificationMethod }}
+            </span>
+          </div>
+        </div>
+
+        <div class="transaction-card__right">
+          <span
+            class="transaction-card__type"
+            [class.type--subscription]="transaction.type === 'SUBSCRIPTION'"
+            [class.type--cancellation]="transaction.type === 'CANCELLATION'"
+          >
+            {{
+              transaction.type === "SUBSCRIPTION"
+                ? "Subscription"
+                : "Cancellation"
+            }}
+          </span>
+          <span
+            class="transaction-card__amount"
+            [class.amount--subscription]="transaction.type === 'SUBSCRIPTION'"
+            [class.amount--cancellation]="transaction.type === 'CANCELLATION'"
+          >
+            {{ transaction.type === "SUBSCRIPTION" ? "-" : "+"
+            }}{{
+              transaction.amount | currency : "COP" : "symbol-narrow" : "1.0-0"
+            }}
+          </span>
+        </div>
+      </mat-card>
+    </div>
+  </ng-container>
+</div>

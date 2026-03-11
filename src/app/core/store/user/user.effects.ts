@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, exhaustMap, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
@@ -10,6 +10,9 @@ import { loadUser, loadUserSuccess } from './user.actions';
  */
 @Injectable()
 export class UserEffects {
+  private actions$ = inject(Actions);
+  private fundsService = inject(FundsService);
+
   /** Effect to load user balance when loadUser action is dispatched */
   loadUser$ = createEffect(() =>
     this.actions$.pipe(
@@ -22,6 +25,4 @@ export class UserEffects {
       )
     )
   );
-
-  constructor(private actions$: Actions, private fundsService: FundsService) {}
 }

@@ -2,6 +2,25 @@
 // GLOBAL STYLES - BTG Pactual Funds App
 // ============================================
 
+@use '@angular/material' as mat;
+
+$btg-theme: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: mat.$azure-palette,
+  ),
+  typography: (
+    brand-family: 'Inter',
+  ),
+  density: (
+    scale: 0,
+  )
+));
+
+html {
+  @include mat.all-component-themes($btg-theme);
+}
+
 // === GOOGLE FONTS ===
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
@@ -83,6 +102,15 @@ html, body {
 }
 
 // === ANGULAR MATERIAL OVERRIDES ===
+.mat-mdc-card {
+  background-color: var(--color-surface) !important;
+  color: var(--color-text-primary) !important;
+}
+
+.mat-mdc-card-content {
+  color: var(--color-text-primary) !important;
+}
+
 .mat-mdc-button,
 .mat-mdc-raised-button,
 .mat-mdc-outlined-button {

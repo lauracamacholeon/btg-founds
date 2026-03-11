@@ -1,1 +1,104 @@
-<p>funds-page works!</p>
+<!-- ============================================ -->
+<!-- FUNDS PAGE - Investment funds management     -->
+<!-- ============================================ -->
+
+<div class="funds-page">
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="page-header__title">
+      <mat-icon>trending_up</mat-icon>
+      <div>
+        <h1>Investment Funds</h1>
+        <p>Manage your BTG Pactual investment portfolio</p>
+      </div>
+    </div>
+
+    <!-- Notification selector -->
+    <div class="notification-selector">
+      <span class="notification-selector__label">Notification method:</span>
+      <div class="notification-selector__options">
+        <button
+          class="notification-btn"
+          [class.active]="selectedNotification() === 'EMAIL'"
+          (click)="setNotification('EMAIL')"
+        >
+          <mat-icon>email</mat-icon>
+          Email
+        </button>
+        <button
+          class="notification-btn"
+          [class.active]="selectedNotification() === 'SMS'"
+          (click)="setNotification('SMS')"
+        >
+          <mat-icon>sms</mat-icon>
+          SMS
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading state -->
+  <div class="loading-container" *ngIf="loading$ | async">
+    <mat-spinner diameter="48"></mat-spinner>
+    <p>Loading funds...</p>
+  </div>
+
+  <!-- Funds grid -->
+  <div class="funds-grid" *ngIf="!(loading$ | async)">
+    <mat-card
+      class="fund-card"
+      [class.fund-card--subscribed]="fund.isSubscribed"
+      *ngFor="let fund of funds$ | async"
+    >
+      <!-- Card header -->
+      <div class="fund-card__header">
+        <div
+          class="fund-card__category"
+          [class.category--fpv]="fund.category === 'FPV'"
+          [class.category--fic]="fund.category === 'FIC'"
+        >
+          {{ fund.category }}
+        </div>
+        <div class="fund-card__status" *ngIf="fund.isSubscribed">
+          <mat-icon>check_circle</mat-icon>
+          Subscribed
+        </div>
+      </div>
+
+      <!-- Card body -->
+      <mat-card-content class="fund-card__content">
+        <h2 class="fund-card__name">{{ fund.name }}</h2>
+        <div class="fund-card__amount">
+          <span class="fund-card__amount-label">Minimum amount</span>
+          <span class="fund-card__amount-value">
+            {{
+              fund.minimumAmount | currency : "COP" : "symbol-narrow" : "1.0-0"
+            }}
+          </span>
+        </div>
+      </mat-card-content>
+
+      <!-- Card actions -->
+      <mat-card-actions class="fund-card__actions">
+        <button
+          mat-raised-button
+          class="btn-subscribe"
+          *ngIf="!fund.isSubscribed"
+          (click)="onSubscribe(fund)"
+        >
+          <mat-icon>add_circle</mat-icon>
+          Subscribe
+        </button>
+        <button
+          mat-stroked-button
+          class="btn-cancel"
+          *ngIf="fund.isSubscribed"
+          (click)="onCancel(fund)"
+        >
+          <mat-icon>cancel</mat-icon>
+          Cancel subscription
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
