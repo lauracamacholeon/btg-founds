@@ -23,6 +23,7 @@ import {
 import { updateBalance } from '../../../../core/store/user/user.actions';
 import { addTransaction } from '../../../../core/store/transactions/transactions.actions';
 import { NotificationMethod } from '../../../../core/models/transaction.model';
+import { CopCurrencyPipe } from '../../../../shared/pipes/cop-currency.pipe';
 
 /**
  * FundsPageComponent - Main page for displaying and managing investment funds
@@ -39,6 +40,7 @@ import { NotificationMethod } from '../../../../core/models/transaction.model';
     MatButtonModule,
     MatIconModule,
     MatChipsModule,
+    CopCurrencyPipe,
   ],
   templateUrl: './funds-page.component.html',
   styleUrl: './funds-page.component.scss',

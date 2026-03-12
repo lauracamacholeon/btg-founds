@@ -71,9 +71,7 @@
         <div class="fund-card__amount">
           <span class="fund-card__amount-label">Minimum amount</span>
           <span class="fund-card__amount-value">
-            {{
-              fund.minimumAmount | currency : "COP" : "symbol-narrow" : "1.0-0"
-            }}
+            {{ fund.minimumAmount | copCurrency }}
           </span>
         </div>
       </mat-card-content>

@@ -10,6 +10,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { Transaction } from '../../../../core/models/transaction.model';
 import { selectAllTransactions } from '../../../../core/store/transactions/transactions.selectors';
+import { CopCurrencyPipe } from '../../../../shared/pipes/cop-currency.pipe';
 
 /**
  * HistoryPageComponent - Displays the full transaction history
@@ -24,6 +25,7 @@ import { selectAllTransactions } from '../../../../core/store/transactions/trans
     MatButtonModule,
     MatChipsModule,
     MatTooltipModule,
+    CopCurrencyPipe,
   ],
   templateUrl: './history-page.component.html',
   styleUrl: './history-page.component.scss',

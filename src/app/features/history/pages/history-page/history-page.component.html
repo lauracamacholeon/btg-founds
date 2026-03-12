@@ -111,9 +111,7 @@
             [class.amount--cancellation]="transaction.type === 'CANCELLATION'"
           >
             {{ transaction.type === "SUBSCRIPTION" ? "-" : "+"
-            }}{{
-              transaction.amount | currency : "COP" : "symbol-narrow" : "1.0-0"
-            }}
+            }}{{ transaction.amount | copCurrency }}
           </span>
         </div>
       </mat-card>
