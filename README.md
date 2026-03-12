@@ -123,6 +123,24 @@ ng test
 
 ---
 
+## Code Quality
+
+This project uses ESLint with Angular-specific rules for static code analysis.
+
+```bash
+# Run lint
+ng lint
+
+```
+
+### Lint rules enforced
+
+- `@angular-eslint/prefer-inject` → use `inject()` function over constructor injection
+- `@angular-eslint/template/prefer-control-flow` → use `@if`, `@for` instead of `*ngIf`, `*ngFor`
+- `@typescript-eslint/no-explicit-any` → avoid using `any` type
+- `@typescript-eslint/no-unused-vars` → no unused variables
+- `@angular-eslint/no-empty-lifecycle-method` → no empty lifecycle hooks
+
 ## Business Rules
 
 - Initial user balance: **COP $500.000**
