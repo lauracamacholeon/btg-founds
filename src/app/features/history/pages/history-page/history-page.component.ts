@@ -30,7 +30,7 @@ import { CopCurrencyPipe } from '../../../../shared/pipes/cop-currency.pipe';
   templateUrl: './history-page.component.html',
   styleUrl: './history-page.component.scss',
 })
-export class HistoryPageComponent implements OnInit {
+export class HistoryPageComponent {
   /** All transactions from the store */
   transactions$: Observable<Transaction[]>;
 

@@ -21,6 +21,41 @@ A web application for managing BTG Pactual investment funds (FPV/FIC), built wit
 
 ---
 
+## Screenshots
+
+### Investment Funds
+
+![Funds Page](docs/screenshots/funds-page.png)
+
+### Subscribed Funds
+
+![Subscribed Funds](docs/screenshots/funds-subscribed.png)
+![Subscribed Funds](docs/screenshots/funds-subscribed-2.png)
+
+### Unsubscribed Funds
+
+![Unsubscribed Funds](docs/screenshots/funds-unsubscribed.png)
+
+### Transaction History
+
+![History Page](docs/screenshots/history-page.png)
+
+### Mobile Responsive (Funds)
+
+![Mobile View](docs/screenshots/funds-mobile.png)
+
+### Mobile Responsive (History)
+
+![Mobile View](docs/screenshots/history-mobile.png)
+
+### Tablet Responsive (Funds)
+
+![Mobile View](docs/screenshots/funds-tablet.png)
+
+### Tablet Responsive (History)
+
+![Mobile View](docs/screenshots/history-tablet.png)
+
 ## Tech Stack
 
 | Technology       | Version | Purpose              |
