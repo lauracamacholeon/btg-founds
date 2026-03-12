@@ -27,18 +27,18 @@ html {
 // === COLOR VARIABLES ===
 :root {
   // Primary - BTG Pactual brand colors
-  --color-primary:        #003087;
-  --color-primary-light:  #1a4aad;
-  --color-primary-dark:   #001f5c;
+  --color-primary:        #002B5B;
+  --color-primary-light:  #003d80;
+  --color-primary-dark:   #001a38;
 
-  // Secondary
-  --color-secondary:      #e8a020;
-  --color-secondary-light:#f0b84a;
-  --color-secondary-dark: #c47e10;
+  // Secondary - BTG Gold
+  --color-secondary:      #F5A623;
+  --color-secondary-light:#f7bc55;
+  --color-secondary-dark: #d4891a;
 
   // Semantic colors
-  --color-success:        #2e7d32;
-  --color-success-light:  #e8f5e9;
+  --color-success:        #1a7a4a;
+  --color-success-light:  #e6f4ed;
   --color-error:          #c62828;
   --color-error-light:    #ffebee;
   --color-warning:        #f57f17;
@@ -48,12 +48,12 @@ html {
 
   // Neutrals
   --color-white:          #ffffff;
-  --color-background:     #f4f6f9;
+  --color-background:     #F7F8FA;
   --color-surface:        #ffffff;
-  --color-border:         #e0e4ea;
-  --color-text-primary:   #1a1f2e;
-  --color-text-secondary: #5a6478;
-  --color-text-disabled:  #9ba3b4;
+  --color-border:         #e2e6ed;
+  --color-text-primary:   #0D1B2A;
+  --color-text-secondary: #4a5568;
+  --color-text-disabled:  #a0aec0;
 
   // Spacing
   --spacing-xs:   4px;
@@ -71,9 +71,9 @@ html {
   --radius-full:  9999px;
 
   // Shadows
-  --shadow-sm:    0 1px 3px rgba(0,0,0,0.08);
-  --shadow-md:    0 4px 12px rgba(0,0,0,0.10);
-  --shadow-lg:    0 8px 24px rgba(0,0,0,0.12);
+  --shadow-sm:    0 1px 4px rgba(0,43,91,0.08);
+  --shadow-md:    0 4px 16px rgba(0,43,91,0.10);
+  --shadow-lg:    0 8px 32px rgba(0,43,91,0.14);
 
   // Typography
   --font-family:  'Inter', sans-serif;
