@@ -81,6 +81,11 @@
         <button
           mat-raised-button
           class="btn-subscribe"
+          [class.btn-disabled]="currentBalance() < fund.minimumAmount"
+          [disabled]="currentBalance() < fund.minimumAmount"
+          [matTooltip]="
+            currentBalance() < fund.minimumAmount ? 'Insufficient balance' : ''
+          "
           *ngIf="!fund.isSubscribed"
           (click)="onSubscribe(fund)"
         >

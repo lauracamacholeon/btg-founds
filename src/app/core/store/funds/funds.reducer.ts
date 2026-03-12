@@ -1,6 +1,11 @@
 import { createReducer, on } from '@ngrx/store';
 import { Fund } from '../../models/fund.model';
-import { loadFundsSuccess, subscribeFund, cancelFund } from './funds.actions';
+import {
+  loadFunds,
+  loadFundsSuccess,
+  subscribeFund,
+  cancelFund,
+} from './funds.actions';
 
 /** Funds state interface */
 export interface FundsState {
@@ -18,6 +23,11 @@ export const initialFundsState: FundsState = {
 
 export const fundsReducer = createReducer(
   initialFundsState,
+  on(loadFunds, (state) => ({
+    ...state,
+    loading: true,
+    error: null,
+  })),
   on(loadFundsSuccess, (state, { funds }) => ({
     ...state,
     funds,

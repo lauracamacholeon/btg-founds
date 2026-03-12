@@ -278,3 +278,10 @@
       grid-template-columns: 1fr;
     }
   }
+
+  .btn-disabled {
+    background: var(--color-text-disabled) !important;
+    color: var(--color-white) !important;
+    cursor: not-allowed !important;
+    opacity: 0.6;
+  }

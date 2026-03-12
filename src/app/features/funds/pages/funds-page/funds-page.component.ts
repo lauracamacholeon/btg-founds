@@ -9,6 +9,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { Fund } from '../../../../core/models/fund.model';
 import {
@@ -41,6 +42,7 @@ import { CopCurrencyPipe } from '../../../../shared/pipes/cop-currency.pipe';
     MatIconModule,
     MatChipsModule,
     CopCurrencyPipe,
+    MatTooltipModule,
   ],
   templateUrl: './funds-page.component.html',
   styleUrl: './funds-page.component.scss',
