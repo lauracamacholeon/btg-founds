@@ -1,9 +1,9 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatDialogModule, MatDialog } from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -63,7 +63,10 @@ export class FundsPageComponent implements OnInit {
   /** Selected notification method - using signal for local state */
   selectedNotification = signal<NotificationMethod>('EMAIL');
 
-  constructor(private store: Store, private snackBar: MatSnackBar) {
+  private store = inject(Store);
+  private snackBar = inject(MatSnackBar);
+
+  constructor() {
     this.funds$ = this.store.select(selectAllFunds);
     this.loading$ = this.store.select(selectFundsLoading);
     this.balance$ = this.store.select(selectUserBalance);

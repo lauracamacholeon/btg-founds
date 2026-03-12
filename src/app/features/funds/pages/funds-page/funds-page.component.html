@@ -38,17 +38,20 @@
   </div>
 
   <!-- Loading state -->
-  <div class="loading-container" *ngIf="loading$ | async">
+  @if (loading$ | async) {
+  <div class="loading-container">
     <mat-spinner diameter="48"></mat-spinner>
     <p>Loading funds...</p>
   </div>
+  }
 
   <!-- Funds grid -->
-  <div class="funds-grid" *ngIf="!(loading$ | async)">
+  @if ((loading$ | async) === false) {
+  <div class="funds-grid">
+    @for (fund of funds$ | async; track fund.id) {
     <mat-card
       class="fund-card"
       [class.fund-card--subscribed]="fund.isSubscribed"
-      *ngFor="let fund of funds$ | async"
     >
       <!-- Card header -->
       <div class="fund-card__header">
@@ -59,10 +62,12 @@
         >
           {{ fund.category }}
         </div>
-        <div class="fund-card__status" *ngIf="fund.isSubscribed">
+        @if (fund.isSubscribed) {
+        <div class="fund-card__status">
           <mat-icon>check_circle</mat-icon>
           Subscribed
         </div>
+        }
       </div>
 
       <!-- Card body -->
@@ -78,6 +83,7 @@
 
       <!-- Card actions -->
       <mat-card-actions class="fund-card__actions">
+        @if (!fund.isSubscribed) {
         <button
           mat-raised-button
           class="btn-subscribe"
@@ -86,22 +92,20 @@
           [matTooltip]="
             currentBalance() < fund.minimumAmount ? 'Insufficient balance' : ''
           "
-          *ngIf="!fund.isSubscribed"
           (click)="onSubscribe(fund)"
         >
           <mat-icon>add_circle</mat-icon>
           Subscribe
         </button>
-        <button
-          mat-stroked-button
-          class="btn-cancel"
-          *ngIf="fund.isSubscribed"
-          (click)="onCancel(fund)"
-        >
+        } @if (fund.isSubscribed) {
+        <button mat-stroked-button class="btn-cancel" (click)="onCancel(fund)">
           <mat-icon>cancel</mat-icon>
           Cancel subscription
         </button>
+        }
       </mat-card-actions>
     </mat-card>
+    }
   </div>
+  }
 </div>

@@ -4,7 +4,7 @@ import { loadUserSuccess, updateBalance } from './user.actions';
 describe('UserReducer', () => {
   /** Test initial state */
   it('should return the initial state', () => {
-    const action = { type: 'UNKNOWN' } as any;
+    const action = { type: 'UNKNOWN' } as { type: string };
     const state = userReducer(undefined, action);
     expect(state).toEqual(initialUserState);
   });

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { CommonModule } from '@angular/common';
@@ -32,8 +32,9 @@ import { CopCurrencyPipe } from './shared/pipes/cop-currency.pipe';
 export class AppComponent implements OnInit {
   /** Current user balance from the store */
   balance$: Observable<number>;
+  private store = inject(Store);
 
-  constructor(private store: Store) {
+  constructor() {
     this.balance$ = this.store.select(selectUserBalance);
   }
 

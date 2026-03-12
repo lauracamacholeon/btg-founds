@@ -119,8 +119,6 @@ http://localhost:4200
 # Run all unit tests
 ng test
 
-# Run tests with coverage
-ng test --code-coverage
 ```
 
 ---

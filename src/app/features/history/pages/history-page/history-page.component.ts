@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -37,11 +37,11 @@ export class HistoryPageComponent implements OnInit {
   /** Active filter - using signal for local state */
   activeFilter = signal<'ALL' | 'SUBSCRIPTION' | 'CANCELLATION'>('ALL');
 
-  constructor(private store: Store) {
+  private store = inject(Store);
+
+  constructor() {
     this.transactions$ = this.store.select(selectAllTransactions);
   }
-
-  ngOnInit(): void {}
 
   /**
    * Sets the active filter for transactions

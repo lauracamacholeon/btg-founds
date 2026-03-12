@@ -43,78 +43,78 @@
   </div>
 
   <!-- Transactions list -->
-  <ng-container *ngIf="transactions$ | async as transactions">
-    <!-- Empty state -->
-    <div
-      class="empty-state"
-      *ngIf="filterTransactions(transactions).length === 0"
-    >
-      <mat-icon>inbox</mat-icon>
-      <h3>No transactions found</h3>
-      <p>Your transaction history will appear here</p>
-    </div>
+  @if (transactions$ | async; as transactions) {
 
-    <!-- Transactions -->
-    <div
-      class="transactions-list"
-      *ngIf="filterTransactions(transactions).length > 0"
+  <!-- Empty state -->
+  @if (filterTransactions(transactions).length === 0) {
+  <div class="empty-state">
+    <mat-icon>inbox</mat-icon>
+    <h3>No transactions found</h3>
+    <p>Your transaction history will appear here</p>
+  </div>
+  }
+
+  <!-- Transactions -->
+  @if (filterTransactions(transactions).length > 0) {
+  <div class="transactions-list">
+    @for (transaction of filterTransactions(transactions); track transaction.id)
+    {
+    <mat-card
+      class="transaction-card"
+      [class.transaction-card--subscription]="
+        transaction.type === 'SUBSCRIPTION'
+      "
+      [class.transaction-card--cancellation]="
+        transaction.type === 'CANCELLATION'
+      "
     >
-      <mat-card
-        class="transaction-card"
-        [class.transaction-card--subscription]="
-          transaction.type === 'SUBSCRIPTION'
-        "
-        [class.transaction-card--cancellation]="
-          transaction.type === 'CANCELLATION'
-        "
-        *ngFor="let transaction of filterTransactions(transactions)"
+      <div
+        class="transaction-card__icon"
+        [class.icon--subscription]="transaction.type === 'SUBSCRIPTION'"
+        [class.icon--cancellation]="transaction.type === 'CANCELLATION'"
       >
-        <div
-          class="transaction-card__icon"
-          [class.icon--subscription]="transaction.type === 'SUBSCRIPTION'"
-          [class.icon--cancellation]="transaction.type === 'CANCELLATION'"
+        <mat-icon>{{ getTransactionIcon(transaction.type) }}</mat-icon>
+      </div>
+
+      <div class="transaction-card__info">
+        <h3 class="transaction-card__name">{{ transaction.fundName }}</h3>
+        <div class="transaction-card__meta">
+          <span class="transaction-card__date">
+            <mat-icon>calendar_today</mat-icon>
+            {{ transaction.date | date : "MMM d, y - h:mm a" }}
+          </span>
+          <span class="transaction-card__notification">
+            <mat-icon>{{
+              transaction.notificationMethod === "EMAIL" ? "email" : "sms"
+            }}</mat-icon>
+            {{ transaction.notificationMethod }}
+          </span>
+        </div>
+      </div>
+
+      <div class="transaction-card__right">
+        <span
+          class="transaction-card__type"
+          [class.type--subscription]="transaction.type === 'SUBSCRIPTION'"
+          [class.type--cancellation]="transaction.type === 'CANCELLATION'"
         >
-          <mat-icon>{{ getTransactionIcon(transaction.type) }}</mat-icon>
-        </div>
-
-        <div class="transaction-card__info">
-          <h3 class="transaction-card__name">{{ transaction.fundName }}</h3>
-          <div class="transaction-card__meta">
-            <span class="transaction-card__date">
-              <mat-icon>calendar_today</mat-icon>
-              {{ transaction.date | date : "MMM d, y - h:mm a" }}
-            </span>
-            <span class="transaction-card__notification">
-              <mat-icon>{{
-                transaction.notificationMethod === "EMAIL" ? "email" : "sms"
-              }}</mat-icon>
-              {{ transaction.notificationMethod }}
-            </span>
-          </div>
-        </div>
-
-        <div class="transaction-card__right">
-          <span
-            class="transaction-card__type"
-            [class.type--subscription]="transaction.type === 'SUBSCRIPTION'"
-            [class.type--cancellation]="transaction.type === 'CANCELLATION'"
-          >
-            {{
-              transaction.type === "SUBSCRIPTION"
-                ? "Subscription"
-                : "Cancellation"
-            }}
-          </span>
-          <span
-            class="transaction-card__amount"
-            [class.amount--subscription]="transaction.type === 'SUBSCRIPTION'"
-            [class.amount--cancellation]="transaction.type === 'CANCELLATION'"
-          >
-            {{ transaction.type === "SUBSCRIPTION" ? "-" : "+"
-            }}{{ transaction.amount | copCurrency }}
-          </span>
-        </div>
-      </mat-card>
-    </div>
-  </ng-container>
+          {{
+            transaction.type === "SUBSCRIPTION"
+              ? "Subscription"
+              : "Cancellation"
+          }}
+        </span>
+        <span
+          class="transaction-card__amount"
+          [class.amount--subscription]="transaction.type === 'SUBSCRIPTION'"
+          [class.amount--cancellation]="transaction.type === 'CANCELLATION'"
+        >
+          {{ transaction.type === "SUBSCRIPTION" ? "-" : "+"
+          }}{{ transaction.amount | copCurrency }}
+        </span>
+      </div>
+    </mat-card>
+    }
+  </div>
+  } }
 </div>

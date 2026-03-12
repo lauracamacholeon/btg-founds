@@ -28,7 +28,7 @@ const mockFunds: Fund[] = [
 describe('FundsReducer', () => {
   /** Test initial state */
   it('should return the initial state', () => {
-    const action = { type: 'UNKNOWN' } as any;
+    const action = { type: 'UNKNOWN' } as { type: string };
     const state = fundsReducer(undefined, action);
     expect(state).toEqual(initialFundsState);
   });
